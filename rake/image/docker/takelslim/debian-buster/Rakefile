@@ -3,7 +3,7 @@
 require 'rake'
 
 cmd_image_debianbuster = 'docker pull debian:buster-slim && ' \
-        'mkdir -p packer/images/debian/buster && ' \
+        'mkdir -p packer/images/docker && ' \
         'cd packer && packer build ' \
         "--var 'base_repo=debian' " \
         "--var 'base_tag=buster-slim' " \
@@ -14,7 +14,7 @@ cmd_image_debianbuster = 'docker pull debian:buster-slim && ' \
 
 namespace :image do
   namespace :docker do
-    namespace :takelbase do
+    namespace :takelslim do
       desc 'Build takelslim debian buster image with packer'
       task :'debian-buster' do
         @commands << cmd_image_debianbuster
