@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+require 'rake'
+
+namespace :image do
+  namespace :docker do
+    desc 'Create takelslim image'
+    task 'takelbase': "image:docker:takelslim:#{@project['dockerhub_tag']}"
+  end
+end
