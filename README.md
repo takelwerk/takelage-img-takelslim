@@ -1,5 +1,5 @@
 [![takelslim image](https://github.com/geospin-takelage/takelage-img-takelslim/actions/workflows/build_deploy_takelslim_nightly.yml/badge.svg)](https://github.com/geospin-takelage/takelage-img-takelslim/actions/workflows/build_deploy_takelslim_nightly.yml)
-[![docker image](https://img.shields.io/docker/v/takelage/takelslim/latest?label=hub.docker.com&color=blue)](https://hub.docker.com/repository/docker/takelage/takelslim)
+[![docker image](https://img.shields.io/docker/v/takelage/takelslim/latest?label=hub.docker.com&color=blue)](https://hub.docker.com/r/takelage/takelslim)
 [![license](https://img.shields.io/github/license/geospin-takelage/takelage-img-takelslim?label=License&color=blueviolet)](https://github.com/geospin-takelage/takelage-img-takelslim/blob/main/LICENSE)
 
 # takelage-img-takelslim
