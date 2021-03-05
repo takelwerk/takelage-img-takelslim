@@ -1,5 +1,5 @@
 ---
-name: takelage-img-takelbase
+name: takelage-img-takelslim
 local_user: packer_local
 dockerhub_user: takelage
 dockerhub_repo: takelslim
