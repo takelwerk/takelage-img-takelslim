@@ -28,6 +28,7 @@
       "type": "shell",
       "inline": [
         "apt-get -y update",
+        "apt-get -y dist-upgrade",
         "apt-get install -y --no-install-recommends python3-minimal python3-apt",
         "apt-get clean"
       ]
