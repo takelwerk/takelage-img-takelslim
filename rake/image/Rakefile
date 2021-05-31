@@ -7,11 +7,11 @@ cmd_image_build = \
   'mkdir -p packer/images/debian/buster && ' \
   'cd packer && packer build ' \
   "--var 'target_user=#{@project['local_user']}' " \
-  "--var 'target_repo=#{@project['name']}-takelslim-prod' " \
+  "--var 'target_repo=#{@project['name']}-project-prod' " \
   'templates/takelslim'
 
 namespace :image do
-  desc 'Build takelbase debian buster image with packer'
+  desc 'Build takelslim debian buster image with packer'
   task :build do
     @commands << cmd_image_build
   end
