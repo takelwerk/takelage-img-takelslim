@@ -7,7 +7,7 @@
 The
 [takelage/takelslim](https://hub.docker.com/repository/docker/takelwerk/takelslim)
 docker image is based on
-[debian:buster-slim](https://hub.docker.com/_/debian).
+[debian:bullseye-slim](https://hub.docker.com/_/debian).
 It has been updated and ansible has been installed.
 
 ## Framework Versions
