@@ -23,7 +23,7 @@ jobs:
           haskell: true
           large-packages: true
           swap-storage: true
-            
+
       - name: Check out repository
         uses: actions/checkout@v2
 
