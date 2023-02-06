@@ -1,4 +1,4 @@
-name: Build and deploy takelslim on arm64
+name: Build and deploy takelslim
 
 on:
   schedule: # run daily at midnight CET
@@ -7,55 +7,51 @@ on:
 
 jobs:
   build-and-deploy-takelbase:
-    runs-on: ubuntu-latest
+    runs-on: buildjet-4vcpu-ubuntu-2204-arm
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Use arm64 runner
-        uses: pguyot/arm-runner-action@v2
+      - name: Install mutagen
+        run: |
+          wget -O /tmp/mutagen.tar.gz https://github.com/mutagen-io/mutagen/releases/download/v0.12.0/mutagen_linux_amd64_v0.12.0.tar.gz
+          sudo tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
+
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1.61.1
         with:
-          base_image: raspios_lite_arm64:latest
-          image_additional_mb: 10240
-          commands: |
-            # Show available disk space (arm64)
-            df -h
-          
-            # Install mutagen
-            wget -O /tmp/mutagen.tar.gz https://github.com/mutagen-io/mutagen/releases/download/v0.12.0/mutagen_linux_amd64_v0.12.0.tar.gz
-            sudo tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
+          ruby-version: 2.7
 
-            # Install ruby
-            apt-get --yes install ruby ruby-dev
+      - name: Install tau
+        run: gem install takeltau
 
-            # Install and run docker
-            apt-get --yes install ca-certificates curl gnupg lsb-release docker
-            mkdir -p /etc/apt/keyrings
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-            chmod a+r /etc/apt/keyrings/docker.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
-            apt-get update
-            apt-get --yes install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-            dockerd &
-  
-            # Install tau
-            gem install takeltau
+      - name: Configure tau
+        run: |
+          echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> $HOME/.takelage.yml
+          cat $HOME/.takelage.yml
 
-            # Configure tau
-            echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> /root/.takelage.yml
-            cat /root/.takelage.yml
+      - name: Pull takelage image
+        run: tau update
 
-            # Pull takelage image
-            tau update
+      - name: Start an instance of takelage
+        run: tau docker container daemon
 
-            # Start an instance of takelage
-            tau docker container daemon
+      - name: Lint ruby
+        run: tau docker container command "rake rubylint"
 
-            # Lint ruby
-            tau docker container command "rake rubylint"
+      - name: Update debian base image
+        run: tau docker container command "rake images:project:update"
 
-            # Update debian base image
-            tau docker container command "rake images:project:update"
+      - name: Build image with packer
+        run: tau docker container command "rake images:project:build"
 
-            # Build image with packer
-            tau docker container command "rake images:project:build"
+      - name: Login to docker hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Tag and push image
+        run: |
+          tau docker container command "rake dockerhub:project:tag"
+          tau docker container command "rake dockerhub:project:push"
