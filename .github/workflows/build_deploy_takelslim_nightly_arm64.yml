@@ -44,8 +44,14 @@ jobs:
             apt-get --yes install ruby ruby-dev
 
             # Install docker
-            apt-get --yes install docker
-
+            apt-get --yes install ca-certificates curl gnupg lsb-releasedocker
+            mkdir -p /etc/apt/keyrings
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+            chmod a+r /etc/apt/keyrings/docker.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
+            apt-get update
+            apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  
             # Install tau
             gem install takeltau
 
