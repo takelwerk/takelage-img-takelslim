@@ -1,4 +1,4 @@
-name: Build and deploy takelslim
+name: Build and deploy takelslim on arm64
 
 on:
   schedule: # run daily at midnight CET
