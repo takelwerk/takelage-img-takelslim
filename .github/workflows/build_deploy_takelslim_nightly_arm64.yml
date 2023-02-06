@@ -22,7 +22,7 @@ jobs:
 
             # Install ruby
             apt-get update
-            apt-get --yes install ruby
+            apt-get --yes install ruby ruby-dev
 
             # Install tau
             gem install takeltau
