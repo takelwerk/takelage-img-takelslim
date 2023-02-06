@@ -44,7 +44,7 @@ jobs:
             apt-get --yes install ruby ruby-dev
 
             # Install docker
-            apt-get --yes install ca-certificates curl gnupg lsb-releasedocker
+            apt-get --yes install ca-certificates curl gnupg lsb-release docker
             mkdir -p /etc/apt/keyrings
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
             chmod a+r /etc/apt/keyrings/docker.gpg
