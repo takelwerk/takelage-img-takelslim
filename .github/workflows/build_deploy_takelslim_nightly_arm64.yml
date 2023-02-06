@@ -20,7 +20,9 @@ jobs:
             wget -O /tmp/mutagen.tar.gz https://github.com/mutagen-io/mutagen/releases/download/v0.12.0/mutagen_linux_amd64_v0.12.0.tar.gz
             sudo tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
 
-            # ruby?
+            # Install ruby
+            apt-get update
+            apt-get install ruby
 
             # Install tau
             gem install takeltau
