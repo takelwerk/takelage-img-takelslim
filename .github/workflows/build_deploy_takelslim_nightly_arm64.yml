@@ -31,6 +31,7 @@ jobs:
         uses: pguyot/arm-runner-action@v2
         with:
           base_image: raspios_lite_arm64:latest
+          image_additional_mb: 10240
           commands: |
             # Show available disk space (arm64)
             df -h
