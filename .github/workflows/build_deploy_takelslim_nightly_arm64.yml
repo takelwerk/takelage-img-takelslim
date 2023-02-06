@@ -41,8 +41,10 @@ jobs:
             sudo tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
 
             # Install ruby
-            apt-get update
             apt-get --yes install ruby ruby-dev
+
+            # Install docker
+            apt-get --yes install docker
 
             # Install tau
             gem install takeltau
