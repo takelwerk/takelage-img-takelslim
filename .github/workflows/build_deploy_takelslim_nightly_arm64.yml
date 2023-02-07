@@ -31,7 +31,7 @@ jobs:
             sudo apt-get update          
   
             # Install prerequisites
-            sudo apt-get --yes install docker ruby
+            sudo apt-get --yes install docker ruby wget
 
             # Install tau
             gem install takeltau
