@@ -12,6 +12,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Install prerequisites
+        run: apt-get --yes install wget
+
       - name: Run commands on arm64
         uses: uraimo/run-on-arch-action@v2
         id: runcmd
@@ -28,7 +31,7 @@ jobs:
             apt-get update          
   
             # Install prerequisites
-            apt-get --yes install docker ruby wget
+            apt-get --yes install docker ruby
 
             # Install tau
             gem install takeltau
