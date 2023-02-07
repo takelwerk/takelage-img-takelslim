@@ -7,51 +7,50 @@ on:
 
 jobs:
   build-and-deploy-takelbase:
-    runs-on: buildjet-4vcpu-ubuntu-2204-arm
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Install mutagen
+      - name: Run commands on arm64
+        uses: uraimo/run-on-arch-action@v2
+        id: runcmd
+        with:
+        arch: aarch64
+        distro: ubuntu_latest
         run: |
+          
+          # Install mutagen
           wget -O /tmp/mutagen.tar.gz https://github.com/mutagen-io/mutagen/releases/download/v0.12.0/mutagen_linux_amd64_v0.12.0.tar.gz
           sudo tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
+          
+          # Update repository indices
+          apt-get update          
 
-      - name: Set up ruby
-        uses: ruby/setup-ruby@v1.61.1
-        with:
-          ruby-version: 2.7
-
-      - name: Install tau
-        run: gem install takeltau
-
-      - name: Configure tau
-        run: |
+          # Install ruby
+          apt-get --yes install ruby
+          
+          # Install docker
+          apt-get --yes install docker
+          
+          # Install tau
+          gem install takeltau
+  
+          # Configure tau
           echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> $HOME/.takelage.yml
           cat $HOME/.takelage.yml
-
-      - name: Pull takelage image
-        run: tau update
-
-      - name: Start an instance of takelage
-        run: tau docker container daemon
-
-      - name: Lint ruby
-        run: tau docker container command "rake rubylint"
-
-      - name: Update debian base image
-        run: tau docker container command "rake images:project:update"
-
-      - name: Build image with packer
-        run: tau docker container command "rake images:project:build"
-
-      - name: Login to docker hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Tag and push image
-        run: |
-          tau docker container command "rake dockerhub:project:tag"
-          tau docker container command "rake dockerhub:project:push"
+  
+          # Pull takelage image
+          docker pull takelwerk/takelbeta:arm64
+  
+          # Start an instance of takelage
+          tau docker container daemon
+  
+          # Lint ruby
+          tau docker container command "rake rubylint"
+  
+          # Update debian base image
+          tau docker container command "rake images:project:update"
+  
+          # Build image with packer
+          tau docker container command "rake images:project:build"
