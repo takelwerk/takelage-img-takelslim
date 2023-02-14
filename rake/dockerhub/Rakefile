@@ -102,7 +102,7 @@ namespace :dockerhub do
                   target_user: target_user,
                   target_repo: target_repo,
                   version: version
-                  )
+                )
               end
             end
 
@@ -254,7 +254,6 @@ namespace :dockerhub do
 
         namespace :tag do
           namespace :latest do
-
             desc 'Tag latest amd64 image for hub.docker.com'
             task :amd64 do
               @commands << format(
