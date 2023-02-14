@@ -1,4 +1,5 @@
-name: Build and deploy takelslim
+---
+name: Build and deploy takelslim amd64
 
 on:
   schedule: # run daily at midnight CET
@@ -6,8 +7,8 @@ on:
   workflow_dispatch: # allow manual trigger
 
 jobs:
-  build-and-deploy-takelbase:
-    runs-on: ubuntu-20.04
+  build-and-deploy-takelbase-amd64:
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -53,5 +54,5 @@ jobs:
 
       - name: Tag and push image
         run: |
-          tau docker container command "rake dockerhub:project:tag"
-          tau docker container command "rake dockerhub:project:push"
+          tau docker container command "rake dockerhub:project:tag:amd64"
+          tau docker container command "rake dockerhub:project:push:amd64"
