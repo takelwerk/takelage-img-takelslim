@@ -54,5 +54,13 @@ jobs:
 
       - name: Tag and push image
         run: |
-          tau docker container command "rake dockerhub:project:tag:amd64"
-          tau docker container command "rake dockerhub:project:push:amd64"
+          tau docker container command "rake dockerhub:project:tag:latest:amd64"
+          tau docker container command "rake dockerhub:project:push:latest:amd64"
+
+      - name: Pull latest arm64 image
+        run: rake dockerhub:project:pull:latest:arm64
+
+      - name: Create and push docker manifest
+        run: |
+          tau docker container command "rake dockerhub:project:manifest:create:latest"
+          tau docker container command "rake dockerhub:project:manifest:push:latest"
