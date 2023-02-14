@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # allow manual trigger
 
 jobs:
-  build-and-deploy-takelbase-amd64:
+  build-and-deploy-takelslim-amd64:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

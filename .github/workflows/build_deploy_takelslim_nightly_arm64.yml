@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # allow manual trigger
 
 jobs:
-  build-and-deploy-takelbase-arm64:
+  build-and-deploy-takelslim-arm64:
     runs-on: ubuntu-latest
     timeout-minutes: 1440
     steps:
