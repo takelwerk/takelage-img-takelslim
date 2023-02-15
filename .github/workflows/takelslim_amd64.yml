@@ -1,5 +1,5 @@
 ---
-name: Build and deploy takelslim amd64
+name: takelslim amd64
 
 on:
   schedule: # run daily at midnight CET
@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # allow manual trigger
 
 jobs:
-  build-and-deploy-takelslim-amd64:
+  takelslim-amd64:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

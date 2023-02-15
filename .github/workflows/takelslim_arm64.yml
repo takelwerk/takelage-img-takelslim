@@ -1,5 +1,5 @@
 ---
-name: Build and deploy takelslim arm64
+name: takelslim arm64
 
 on:
   schedule: # run daily at midnight CET
@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # allow manual trigger
 
 jobs:
-  build-and-deploy-takelslim-arm64:
+  takelslim-arm64:
     runs-on: ubuntu-latest
     timeout-minutes: 1440
     steps:
