@@ -20,7 +20,7 @@ namespace :project do
                  dockerhub:project:manifest:create:version
                  dockerhub:project:manifest:push:version]
   desc 'Create and deploy takelslim amd64 image to dockerhub'
-  task arm64: %w[rubylint
+  task amd64: %w[rubylint
                  dockerhub:login
                  images:project:update
                  images:project:build
