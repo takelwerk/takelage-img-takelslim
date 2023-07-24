@@ -116,14 +116,14 @@ jobs:
       - name: Run takelprepare in qemu vm
         run: |
           sshpass -p ubuntu scp -P 2222 -o StrictHostKeyChecking=accept-new $HOME/takelprepare.sh ubuntu@localhost:
-          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost sh takelprepare.sh
+          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost bash takelprepare.sh
 
       - name: Run takeldocker in qemu vm
         run: |
           sshpass -p ubuntu scp -P 2222 -o StrictHostKeyChecking=accept-new $HOME/takeldocker.sh ubuntu@localhost:
-          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost sh takeldocker.sh
+          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost bash takeldocker.sh
 
       - name: Run takelaction in qemu vm
         run: |
           sshpass -p ubuntu scp -P 2222 -o StrictHostKeyChecking=accept-new $HOME/takelaction.sh ubuntu@localhost:
-          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost sh takelaction.sh
+          sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost bash takelaction.sh
