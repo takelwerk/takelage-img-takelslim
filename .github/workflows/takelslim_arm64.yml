@@ -100,7 +100,7 @@ jobs:
       - name: Get mutagen version
         run: |
           bash $HOME/takeldocker.sh          
-          MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64")
+          MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64)
           echo "MUTAGEN=$MUTAGEN"
           echo "MUTAGEN=$MUTAGEN" >> "$GITHUB_ENV"
 
