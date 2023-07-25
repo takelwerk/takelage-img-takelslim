@@ -14,6 +14,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+
+      - name: Install tau
+        run: gem install takeltau
+
       - name: Create randmac.py
         run: |
           cat << EOF > $HOME/randmac.py
@@ -91,7 +99,8 @@ jobs:
 
       - name: Get mutagen version
         run: |
-          MUTAGEN=`sshpass -p ubuntu ssh -p 2222 -o StrictHostKeyChecking=accept-new ubuntu@localhost docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64`
+          bash $HOME/takeldocker.sh          
+          MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64")
           echo "MUTAGEN=$MUTAGEN"
           echo "MUTAGEN=$MUTAGEN" >> "$GITHUB_ENV"
 
