@@ -21,6 +21,10 @@ build-job:
     - 'echo "docker_repo: takelbuild" >> ~/.takelage.yml'
     - 'echo "docker_tag: latest-arm64" >> ~/.takelage.yml'
 
+    - systemctl status docker
+    - systemctl start docker
+    - systemctl status docker
+
     # Pull takelage image
     - tau update
 
