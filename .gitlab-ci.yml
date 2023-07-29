@@ -36,7 +36,9 @@ build:
 
     # Install mutagen
     - export MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64)
+    - export MUTAGEN_FILE=https://github.com/mutagen-io/mutagen/releases/download/v$MUTAGEN/mutagen_linux_arm64_v$MUTAGEN.tar.gz
     - wget -O /tmp/mutagen.tar.gz $MUTAGEN_FILE
+    - tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
     - mutagen daemon start
 
     # Start an instance of takelage
