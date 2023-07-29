@@ -16,9 +16,9 @@ build-job:
 
     # Install and configure tau
     - gem install takeltau
-    - echo 'eins'
-    - echo 'zwei'
-    - echo 'drei'
+    - 'echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> ~/.takelage.yml'
+    - 'echo "docker_repo: takelbuild" >> ~/.takelage.yml'
+    - 'echo "docker_tag: latest-arm64" >> ~/.takelage.yml'
 
     # Pull takelage image
     - tau update
