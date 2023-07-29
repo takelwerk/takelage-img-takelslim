@@ -16,6 +16,9 @@ build-job:
 
     # Install and configure tau
     - gem install takeltau
+    - echo 'eins'
+    - echo 'zwei'
+    - echo 'drei'
 
     # Pull takelage image
     - tau update
