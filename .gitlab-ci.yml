@@ -35,7 +35,7 @@ build:
     - tau update
 
     # Install mutagen
-    - MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64)
+    - export MUTAGEN=$(docker inspect --format '{{ index .Config.Labels "mutagen" }}' takelwerk/takelbuild:latest-arm64)
     - wget -O /tmp/mutagen.tar.gz $MUTAGEN_FILE
     - mutagen daemon start
 
