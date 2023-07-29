@@ -13,3 +13,10 @@ build-job:
     - echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | tee /etc/apt/sources.list.d/docker.list
     - apt-get update
     - apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin g++-aarch64-linux-gnu gcc-aarch64-linux-gnu make ruby ruby-dev
+
+    # Install and configure tau
+    - gem install takeltau
+    - echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> ~/.takelage.yml
+    - echo "docker_repo: takelbuild" >> ~/.takelage.yml
+    - echo "docker_tag: latest-arm64" >> ~/.takelage.yml
+    - cat ~/.takelage.yml
