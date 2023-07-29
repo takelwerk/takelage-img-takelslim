@@ -5,6 +5,9 @@ build-job:
   stage: build
   image: debian:stable-slim
   script:
-    - sudo apt update
-    - sudo apt install ruby ruby-dev
-    - sudo gem install takeltau
+    - whoami
+    - pwd
+    - ls -la
+    - apt update
+    - apt install ruby ruby-dev
+    - gem install takeltau
