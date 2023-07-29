@@ -2,8 +2,6 @@ default:
   image: debian:stable-slim
   services:
     - docker:dind
-  before_script:
-    - docker info
 
 variables:
   DOCKER_HOST: tcp://docker:2376
