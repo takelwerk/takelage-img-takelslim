@@ -8,6 +8,6 @@ build-job:
     - whoami
     - pwd
     - ls -la
-    - apt update
-    - apt install ruby ruby-dev
+    - apt-get update
+    - apt-get --yes install ruby ruby-dev
     - gem install takeltau
