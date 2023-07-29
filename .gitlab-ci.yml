@@ -16,7 +16,6 @@ build-job:
 
     # Install and configure tau
     - gem install takeltau
-    - echo 'docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh'
     - cat ~/.takelage.yml
 
     # Pull takelage image
