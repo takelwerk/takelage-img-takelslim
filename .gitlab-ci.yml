@@ -5,4 +5,6 @@ build-job:
   stage: build
   image: debian:stable-slim
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - sudo apt update
+    - sudo apt install ruby ruby-dev
+    - sudo gem install takeltau
