@@ -1,16 +1,28 @@
+default:
+  image: docker:22.04
+  services:
+    - docker:22.04-dind
+  before_script:
+    - docker info
+
+variables:
+  DOCKER_HOST: tcp://docker:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_VERIFY: 1
+  DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+
 stages:
   - build
 
-build-job:
+build:
   stage: build
-  image: debian:stable-slim
   script:
     # Install docker and ruby
     - apt-get update
     - apt-get --yes install curl gpg
     - mkdir -m 0755 -p /etc/apt/keyrings
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    - echo 'deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable' | tee /etc/apt/sources.list.d/docker.list
+    - echo 'deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable' >> /etc/apt/sources.list.d/docker.list
     - apt-get update
     - apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin g++-aarch64-linux-gnu gcc-aarch64-linux-gnu make ruby ruby-dev
 
@@ -20,8 +32,6 @@ build-job:
     - 'echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> ~/.takelage.yml'
     - 'echo "docker_repo: takelbuild" >> ~/.takelage.yml'
     - 'echo "docker_tag: latest-arm64" >> ~/.takelage.yml'
-
-    - ls -la /var/run/docker.sock
 
     # Pull takelage image
     - tau update
