@@ -45,7 +45,7 @@ build:
     - export USER=root
 
     # Start an instance of takelage
-    - tau docker container daemon -l debug
+    - tau docker container daemon
 
     # Lint ruby
     - tau docker container command "rake rubylint"
