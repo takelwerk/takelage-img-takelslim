@@ -41,6 +41,7 @@ build:
     - wget -O /tmp/mutagen.tar.gz $MUTAGEN_FILE
     - tar xvfz /tmp/mutagen.tar.gz -C /usr/local/bin
     - mutagen daemon start
+    - export USER=root
 
     # Start an instance of takelage
     - tau docker container daemon -l debug
