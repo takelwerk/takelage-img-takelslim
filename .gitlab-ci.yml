@@ -30,6 +30,7 @@ build:
     - 'echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> ~/.takelage.yml'
     - 'echo "docker_repo: takelbuild" >> ~/.takelage.yml'
     - 'echo "docker_tag: latest-arm64" >> ~/.takelage.yml'
+    - 'echo "cmd_mutagen_forward_socket_docker: mutagen forward create --name=%{socketname} --label=%{hostlabel} --label=%{takellabel} --socket-group-source=docker --socket-permission-mode=0660 docker://root@%{container}:unix:/var/run/docker.sock tcp:localhost:2376'
 
     # Pull takelage image
     - tau update
