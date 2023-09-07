@@ -34,6 +34,7 @@ build:
     - 'echo "cmd_mutagen_forward_socket_docker: mutagen forward create --name=%{socketname} --label=%{hostlabel} --label=%{takellabel} --socket-group-source=docker --socket-permission-mode=0660 docker://root@%{container}:tcp:localhost:2376 tcp:localhost:2376" >> ~/.takelage.yml'
 
     # Pull takelage image
+    - docker info
     - tau update
 
     # Install mutagen
