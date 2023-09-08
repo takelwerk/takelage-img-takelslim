@@ -20,29 +20,29 @@ build-with-takelage:
     - rake rubylint
 
     # Update debian base image
-    - rake images:project:update"
+    - rake images:project:update
 
     # Build image with packer
-    - rake images:project:build"
+    - rake images:project:build
 
     # Login to dockerhub
-    - docker login --username takelwerk --password $DOCKERHUB_TOKEN"
+    - docker login --username takelwerk --password $DOCKERHUB_TOKEN
 
     # Tag and push image
-    - rake dockerhub:project:tag:latest:arm64"
-    - rake dockerhub:project:push:latest:arm64"
-    - rake dockerhub:project:tag:version:arm64"
-    - rake dockerhub:project:push:version:arm64"
+    - rake dockerhub:project:tag:latest:arm64
+    - rake dockerhub:project:push:latest:arm64
+    - rake dockerhub:project:tag:version:arm64
+    - rake dockerhub:project:push:version:arm64
 
     # Pull amd64 images
-    - rake dockerhub:project:pull:latest:amd64"
-    - rake dockerhub:project:pull:version:amd64"
+    - rake dockerhub:project:pull:latest:amd64
+    - rake dockerhub:project:pull:version:amd64
 
     # Create and push docker manifests
-    - rake dockerhub:project:manifest:create:latest"
-    - rake dockerhub:project:manifest:push:latest"
-    - rake dockerhub:project:manifest:create:version"
-    - rake dockerhub:project:manifest:push:version"
+    - rake dockerhub:project:manifest:create:latest
+    - rake dockerhub:project:manifest:push:latest
+    - rake dockerhub:project:manifest:create:version
+    - rake dockerhub:project:manifest:push:version
 
 build-with-debian-and-takelage:
   stage: build
