@@ -2,7 +2,7 @@ default:
   image: debian:stable-slim
   services:
     - name: docker:dind
-      command: [ "dockerd", "-H", "tcp://0.0.0.0:2375", "--tls=false" ]:
+      command: [ "dockerd", "-H", "tcp://0.0.0.0:2375", "--tls=false" ]
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
