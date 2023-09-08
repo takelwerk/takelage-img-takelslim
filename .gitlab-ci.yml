@@ -3,7 +3,7 @@ default:
   services:
     - docker:dind
   before_script:
-    - ls -la /certs
+    - ls -la /certs/client
 
 variables:
   DOCKER_HOST: tcp://docker:2376
