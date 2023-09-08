@@ -2,6 +2,8 @@ default:
   image: debian:stable-slim
   services:
     - docker:dind
+  before_script:
+    - ls -la /certs
 
 variables:
   DOCKER_HOST: tcp://docker:2376
