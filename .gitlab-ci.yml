@@ -45,6 +45,9 @@ build-with-takelage:
     - rake dockerhub:project:manifest:push:version"
 
 build-with-debian-and-takelage:
+  stage: build
+  rules:
+    - when: never
   script:
     # Install docker and ruby
     - apt-get update
