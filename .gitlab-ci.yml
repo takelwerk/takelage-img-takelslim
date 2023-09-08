@@ -3,10 +3,10 @@ default:
   services:
     - name: docker:dind
       command: [ "dockerd", "-H", "tcp://0.0.0.0:2375", "--tls=false" ]
+
 variables:
   DOCKER_HOST: tcp://docker:2375
-  DOCKER_TLS_CERTDIR: ""
-  DOCKER_TLS_VERIFY: 0
+  DOCKER_TLS_CERTDIR: ''
 
 stages:
   - build
@@ -23,6 +23,8 @@ build:
     - apt-get update
     - apt-get --yes install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin g++-aarch64-linux-gnu gcc-aarch64-linux-gnu make ruby ruby-dev wget
 
+    - docker info
+
     # Install and configure tau
     # Single quotes work around gitlab colon+space yaml problem
     - gem install takeltau
@@ -33,7 +35,6 @@ build:
     - 'echo "cmd_mutagen_forward_socket_docker: mutagen forward create --name=%{socketname} --label=%{hostlabel} --label=%{takellabel} --socket-group-source=docker --socket-permission-mode=0660 docker://root@%{container}:tcp:localhost:2375 tcp:localhost:2375" >> ~/.takelage.yml'
 
     # Pull takelage image
-    - docker info
     - tau update
 
     # Install mutagen
