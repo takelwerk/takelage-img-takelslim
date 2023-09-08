@@ -29,7 +29,7 @@ build:
     - 'echo "docker_entrypoint_options: --no-git --no-gopass --no-gpg --no-ssh" >> ~/.takelage.yml'
     - 'echo "docker_repo: takelbuild" >> ~/.takelage.yml'
     - 'echo "docker_tag: latest-arm64" >> ~/.takelage.yml'
-    - 'echo "cmd_docker_container_create: docker run --detach --env TAKELAGE_PROJECT_BASE_DIR=%{workdir} --env TZ=%{timezone} --env DOCKER_HOST=tcp://localhost:2376 --env DOCKER_TLS_CERTDIR=$DOCKER_TLS_CERTDIR --env DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY --hostname %{container} --name %{container} --network %{container} --rm --shm-size %{shmsize} --tty --volume %{homedir}:/hostdir --volume %{workdir}:/project %{volume_dev} --workdir /project %{docker_run_options} %{image} %{entrypoint} --gid %{gid} --home %{homedir} --uid %{uid} --username %{username} --extra=%{extra} %{entrypoint_options}" >> ~/.takelage.yml'
+    - 'echo "cmd_docker_container_create: docker run --detach --env TAKELAGE_PROJECT_BASE_DIR=%{workdir} --env TZ=%{timezone} --env DOCKER_HOST=tcp://localhost:2375 --env DOCKER_TLS_CERTDIR=$DOCKER_TLS_CERTDIR --env DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY --hostname %{container} --name %{container} --network %{container} --rm --shm-size %{shmsize} --tty --volume %{homedir}:/hostdir --volume %{workdir}:/project %{volume_dev} --workdir /project %{docker_run_options} %{image} %{entrypoint} --gid %{gid} --home %{homedir} --uid %{uid} --username %{username} --extra=%{extra} %{entrypoint_options}" >> ~/.takelage.yml'
     - 'echo "cmd_mutagen_forward_socket_docker: mutagen forward create --name=%{socketname} --label=%{hostlabel} --label=%{takellabel} --socket-group-source=docker --socket-permission-mode=0660 docker://root@%{container}:tcp:localhost:2375 tcp:localhost:2375" >> ~/.takelage.yml'
 
     # Pull takelage image
