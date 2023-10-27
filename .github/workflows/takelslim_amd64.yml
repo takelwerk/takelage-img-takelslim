@@ -44,7 +44,7 @@ jobs:
           mutagen daemon start
 
       - name: Start an instance of takelage
-        run: ∑
+        run: tau docker container daemon
 
       - name: Lint ruby
         run: tau docker container command "rake rubylint"
