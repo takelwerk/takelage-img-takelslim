@@ -13,9 +13,12 @@ variables:
 stages:
   - build
 
-build:
+build :
   stage: build
   script:
+    # Link project directory
+    - ln -fs $CI_PROJECT_DIR /project
+
     # Lint ruby
     - rake rubylint
 
