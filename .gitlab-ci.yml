@@ -19,8 +19,6 @@ build :
     # Link project directory
     - ln -fs $CI_PROJECT_DIR /project
 
-    - apt update
-
     # Lint ruby
     - rake rubylint
 
