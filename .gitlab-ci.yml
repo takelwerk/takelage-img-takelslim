@@ -14,8 +14,6 @@ stages:
 
 build :
   stage: build
-  tags:
-    - kubernetes
   script:
     # Link project directory
     - ln -fs $CI_PROJECT_DIR /project
