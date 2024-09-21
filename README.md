@@ -3,8 +3,8 @@
 The
 [takelwerk/takelslim](https://hub.docker.com/repository/docker/takelwerk/takelslim)
 docker image is based on
-[debian:bullseye-slim](https://hub.docker.com/_/debian).
-It has been updated and ansible has been installed.
+[debian:bookworm-slim](https://hub.docker.com/_/debian).
+It has been updated and python has been installed.
 
 ## Framework Versions
 
